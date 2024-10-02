@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z index y Apilamiento</title>
+    <style>
+        div {
+            position: absolute;
+            background-color: aquamarine;
+        }
+
+        .one {
+            z-index: 4;
+        }
+
+        .two {
+            z-index: 3;
+        }
+
+        .red {
+                width: 20px;
+                height: 20px;
+                background: red;
+                z-index: 5;
+        }
+
+        .blue {
+                width: 20px;
+                height: 20px;
+                z-index: 4;
+                background: blue;
+        }
+
+        .yellow {
+                width: 20px;
+                height: 20px;
+                background: yellow;
+                z-index: 6;
+                top: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- El Z index es un eje imaginario, entre "el nav" y el usuario,
+         por ejermplo un pop-up se entiende como una capa flotando 
+         encima del nav-->
+    <!--
+        Esto puede suceder de dos maneras, la primera con elementos dentro
+        del mismo HTML, como cuando un elemento de tipo position relative, y
+         un nav de position fixed, y este quedaba por encima al scrolear
+         La otra es usar la propiedad z index, nos va a dejar colocar un orden 
+         ascendente para este eje z. 
+          En el caso del z index, nunca un elemento hijo va a estar por encima 
+          de su elemento padre, sin importar el index
+    -->
+    <!--<div class="two">Master</div>
+    <div class="one">Platzi</div>-->
+    <section>
+        <div class="red">RED</div>
+        <div class="blue">BLUE
+            <div class="yellow">YELLOW</div>
+        </div>
+        
+
+    </section>
+
+</body>
+</html>

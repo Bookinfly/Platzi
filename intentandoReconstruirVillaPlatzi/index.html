@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Villa Platzi - Animación de Animales</title>
+    <style>
+        /* Estilos básicos para centrar el canvas en la página */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        canvas {
+            border: 1px solid #000;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Villa Platzi</h1>
+    <!-- Canvas donde se dibujarán el fondo y los animales -->
+    <canvas id="villaplatzi" width="800" height="600"></canvas>
+
+    <!-- Información sobre cómo mover el cerdo -->
+    <p>Mueve el cerdo usando las teclas de flecha del teclado.</p>
+
+    <!-- Integración del script JavaScript -->
+    <script>
+        // Obtener el elemento canvas por su ID "villaplatzi"
+        const canvas = document.getElementById("villaplatzi");
+        const papel = canvas.getContext("2d");
+
+        // Definición de objetos para cada tipo de imagen (fondo, vaca, pollo, cerdo)
+        const fondo = {
+            url: "tile.png",       // Ruta de la imagen de fondo
+            cargaOk: false          // Bandera para verificar si la imagen se ha cargado
+        };
+
+        const vaca = {
+            url: "vaca.png",
+            cargaOk: false
+        };
+
+        const pollo = {
+            url: "pollo.png",
+            cargaOk: false
+        };
+
+        const cerdo = {
+            url: "cerdo.png",
+            cargaOk: false,
+            x: 300,                 // Posición inicial X del cerdo
+            y: 400                  // Posición inicial Y del cerdo
+        };
+
+        // Cargar las imágenes y asignarles eventos de carga
+        fondo.objeto = new Image();
+        fondo.objeto.src = fondo.url;
+        fondo.objeto.addEventListener("load", cargarFondo);
+
+        vaca.objeto = new Image();
+        vaca.objeto.src = vaca.url;
+        vaca.objeto.addEventListener("load", cargarVacas);
+
+        pollo.objeto = new Image();
+        pollo.objeto.src = pollo.url;
+        pollo.objeto.addEventListener("load", cargarPollos);
+
+        cerdo.objeto = new Image();
+        cerdo.objeto.src = cerdo.url;
+        cerdo.objeto.addEventListener("load", cargarCerdos);
+
+        /**
+         * Funciones para manejar la carga de cada imagen
+         */
+        function cargarFondo() {
+            fondo.cargaOk = true;
+            dibujar(); // Llamar a dibujar cada vez que se carga una imagen
+        }
+
+        function cargarVacas() {
+            vaca.cargaOk = true;
+            dibujar();
+        }
+
+        function cargarPollos() {
+            pollo.cargaOk = true;
+            dibujar();
+        }
+
+        function cargarCerdos() {
+            cerdo.cargaOk = true;
+            dibujar();
+        }
+
+        /**
+         * Función principal para dibujar en el canvas
+         */
+        function dibujar() {
+            // Dibujar el fondo si ya se ha cargado
+            if (fondo.cargaOk) {
+                papel.drawImage(fondo.objeto, 0, 0, canvas.width, canvas.height);
+            }
+
+            // Dibujar las vacas si ya se han cargado
+            if (vaca.cargaOk) {
+                const cantidadVacas = aleatorio(4, 10); // Número aleatorio de vacas
+                for (let i = 0; i < cantidadVacas; i++) {
+                    const x = aleatorio(0, 5) * 40 + 220; // Posición X aleatoria
+                    const y = aleatorio(0, 8) * 38;       // Posición Y aleatoria
+                    papel.drawImage(vaca.objeto, x, y);
+                }
+            }
+
+            // Dibujar los pollos si ya se han cargado
+            if (pollo.cargaOk) {
+                const cantidadPollos = aleatorio(10, 40); // Número aleatorio de pollos
+                for (let i = 0; i < cantidadPollos; i++) {
+                    const x = aleatorio(0, 5) * 35; // Posición X aleatoria
+                    const y = aleatorio(0, 5) * 80; // Posición Y aleatoria
+                    papel.drawImage(pollo.objeto, x, y);
+                }
+            }
+
+            // Dibujar el cerdo si ya se ha cargado
+            if (cerdo.cargaOk) {
+                papel.drawImage(cerdo.objeto, cerdo.x, cerdo.y);
+            }
+        }
+
+        /**
+         * Función para generar un número aleatorio entre min y max (inclusive)
+         * @param {number} min - Valor mínimo
+         * @param {number} max - Valor máximo
+         * @returns {number} Número aleatorio entre min y max
+         */
+        function aleatorio(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        /**
+         * Función para manejar el movimiento del cerdo con las teclas de flecha
+         * @param {KeyboardEvent} evento - Evento de teclado
+         */
+        function ubicarCerdo(evento) {
+            const movimiento = 5; // Cantidad de píxeles que se moverá el cerdo por cada pulsación
+
+            // Definir las teclas de flecha
+            const teclas = {
+                UP: 38,
+                DOWN: 40,
+                LEFT: 37,
+                RIGHT: 39
+            };
+
+            // Reiniciar el dibujo cada vez que el cerdo se mueve
+            if (fondo.cargaOk) {
+                papel.drawImage(fondo.objeto, 0, 0, canvas.width, canvas.height);
+            }
+            if (vaca.cargaOk) {
+                const cantidadVacas = aleatorio(4, 10);
+                for (let i = 0; i < cantidadVacas; i++) {
+                    const x = aleatorio(0, 5) * 40 + 220;
+                    const y = aleatorio(0, 8) * 38;
+                    papel.drawImage(vaca.objeto, x, y);
+                }
+            }
+            if (pollo.cargaOk) {
+                const cantidadPollos = aleatorio(10, 40);
+                for (let i = 0; i < cantidadPollos; i++) {
+                    const x = aleatorio(0, 5) * 35;
+                    const y = aleatorio(0, 5) * 80;
+                    papel.drawImage(pollo.objeto, x, y);
+                }
+            }
+
+            // Mover el cerdo según la tecla presionada
+            switch (evento.keyCode) {
+                case teclas.UP:
+                    if (cerdo.y - movimiento >= 0) { // Evitar que salga del canvas por arriba
+                        cerdo.y -= movimiento;
+                    }
+                    break;
+                case teclas.DOWN:
+                    if (cerdo.y + movimiento + cerdo.objeto.height <= canvas.height) { // Evitar que salga por abajo
+                        cerdo.y += movimiento;
+                    }
+                    break;
+                case teclas.LEFT:
+                    if (cerdo.x - movimiento >= 0) { // Evitar que salga por la izquierda
+                        cerdo.x -= movimiento;
+                    }
+                    break;
+                case teclas.RIGHT:
+                    if (cerdo.x + movimiento + cerdo.objeto.width <= canvas.width) { // Evitar que salga por la derecha
+                        cerdo.x += movimiento;
+                    }
+                    break;
+            }
+
+            // Dibujar el cerdo en su nueva posición
+            if (cerdo.cargaOk) {
+                papel.drawImage(cerdo.objeto, cerdo.x, cerdo.y);
+            }
+        }
+
+        // Asignar el evento de teclado para mover el cerdo
+        document.addEventListener("keydown", ubicarCerdo);
+    </script>
+</body>
+</html>

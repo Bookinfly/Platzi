@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //desafio del curso basico de js, lista de autos, clase 18
+
+
+ford = ["Ford", "Fiesta", "Ka", "Focus", "Ranger"];
+chevrolet = ["Chevrolet", "Corsa", "Astra", "Onix", "Cruze"];
+fiat = ["Fiat", "Uno", "Siena", "Grand Siena", "Fiorino"];
+volskWagen = ["Voolkswagen", "Gol", "Golf", "Amarok", "Fox"];
+renault = ["Renault", "Twingo", "Megan", "Kangoo", "Duster"];
+M = [ford, chevrolet, fiat, volskWagen, renault];
+fabric = [2004, 2005, 2010, 2015, 2020, 2021, 2022];
+stock = 0;
+
+
+function auto(marca, modelo, annio){
+    this.marca = marca;
+    this.modelo = modelo;
+    this.annio = annio;    
+}
+
+while (stock < 30){
+    stock ++;
+    marca = M[aleatorio(0, 4)];
+    modelo = marca[aleatorio(1, 4)];
+    marca = marca[0];
+    annio = fabric[aleatorio(0, 6)];
+    var autoNuevo = new auto(marca, modelo, annio);
+    console.log(autoNuevo);
+}
+
+
+function aleatorio(min , maxi)
+{
+	var resultado;
+	resultado =  Math.floor(Math.random() * (maxi - min + 1)) + min;
+	return resultado;
+}
+
+    </script>
+</body>
+</html>
+

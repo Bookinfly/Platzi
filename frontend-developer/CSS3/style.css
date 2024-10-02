@@ -1,0 +1,48 @@
+
+.pollo {
+    color: aliceblue;
+    background-color: black;
+}
+#cosa {
+    background-color: aquamarine;
+}
+h1[arbusto=" mullido"]{
+    background-color: brown;
+}
+div p {
+    background-color: cadetblue;
+}
+div > div {
+    background-color: black;
+    color: antiquewhite;
+}
+#l{
+    background-color: darkviolet;
+    display: inline;
+}
+div + section{
+    color: aqua;
+}
+div ~ h6 {
+    background-color: chartreuse;
+    display: inline-block;
+    width: 500px;
+    height: 500px;
+    text-align: center;
+    size: 10px;
+
+}
+p:hover{
+    color: lightsteelblue;
+}
+p::first-letter{
+    border-color: rgb(226, 10, 10);
+    color: blue;
+}
+p::after{
+    content: counter(ssdfvc);
+    content: icon;
+}
+::placeholder {
+    color: brown;
+}
